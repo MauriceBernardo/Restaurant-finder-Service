@@ -103,45 +103,59 @@ export function find_farthest_restaurant_in_neighbourhood(x, y) {
 }
 
 
-// def all_neighbourhood_coordinate():
-//     """
-//     Function that produce all neighbourhood in terms of coordinates and return
-//     it in form of list
-//     """
-//     possiblegrid = []
-//     for y in range(0, 10):
-//         for x in range(0, 10):
-//             possiblegrid.append((x, y))
-//     return possiblegrid
+export function all_neighbourhood_coordinate() {
+  /**
+    * Function that produce all neighbourhood in terms of coordinates and return
+    * it in form of list
+    */
 
-// def find_closest_restaurant(x, y):
-//     """
-//     Function that takes 2 float as coordinate and
-//     return the closest restaurant in Gridbourne to the coordinate
-//     """
-//     possiblelist = []
-//     closestresto = []
-//     possiblegrid = all_neighbourhood_coordinate()
+  const possiblegrid = [];
 
-//     # Find the distance from the coordinate to all restaurants in Gridbourne
-//     for axis in possiblegrid:
-//         restaurant = find_all_restaurants_in_neighbourhood(axis[0], axis[1])
-//         crdist = distance(crlocation(axis[0], axis[1]), (x, y))
-//         mrdist = distance(mrlocation(axis[0], axis[1]), (x, y))
-//         possiblelist.append([restaurant[0], crdist])
-//         possiblelist.append([restaurant[1], mrdist])
+  for (let y = 0; y < 10; y++) {
+    for (let x = 0; x < 10; x++) {
+      possiblegrid.push([x, y]);
+    }
+  }
 
-//     # Find the distance of closest restaurants in Gridbourne to the coordinate
-//     mindist = possiblelist[0][1]
-//     for dist in possiblelist:
-//         if dist[1] < mindist:
-//             mindist = dist[1]
+  return possiblegrid;
+}
 
-//     # Append and return the restaurants with the closest distance
-//     for resto in possiblelist:
-//         if mindist == resto[1]:
-//             closestresto.append(resto[0])
-//     return sorted(closestresto)
+export function find_closest_restaurant(x, y) {
+  /**
+     * Function that takes 2 float as coordinate and
+     * return the closest restaurant in Gridbourne to the coordinate
+     *
+     */
+
+  const possiblelist = [];
+  const closestresto = [];
+  const possiblegrid = all_neighbourhood_coordinate();
+
+  //  Find the distance from the coordinate to all restaurants in Gridbourne
+  for (const axis of possiblegrid) {
+    const restaurant = find_all_restaurants_in_neighbourhood(axis[0], axis[1]);
+    const crdist = distance(crlocation(axis[0], axis[1]), [x, y]);
+    const mrdist = distance(mrlocation(axis[0], axis[1]), [x, y]);
+    possiblelist.push([restaurant[0], crdist]);
+    possiblelist.push([restaurant[1], mrdist]);
+  }
+
+  //  Find the distance of closest restaurants in Gridbourne to the coordinate
+  let mindist = possiblelist[0][1];
+  for (const dist of possiblelist) {
+    if (dist[1] < mindist) {
+      mindist = dist[1];
+    }
+  }
+
+  //  Append and return the restaurants with the closest distance
+  for (const resto of possiblelist) {
+    if (mindist === resto[1]) {
+      closestresto.push(resto[0]);
+    }
+  }
+  return closestresto.sort();
+}
 
 // def find_closest_restaurant_on_path(list_of_stops):
 //     """
