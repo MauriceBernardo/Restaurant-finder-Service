@@ -10,11 +10,11 @@ for (const row of ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']) {
 
 export function find_my_neighbourhood(x, y) {
   /**
-     * Function that takes 2 float as coordinate and
-     * return the neighbourhood of the coordinate
-     */
+    * Function that takes 2 float as coordinate and
+    * return the neighbourhood of the coordinate
+    */
   try {
-    return neighbourhood[Number(y)][Number(x)];
+    return neighbourhood[Math.floor(Number(y))][Math.floor(Number(x))];
   } catch (e) {
     throw new e();
   }
@@ -23,57 +23,60 @@ export function find_my_neighbourhood(x, y) {
 
 export function find_all_restaurants_in_neighbourhood(x, y) {
   /**
-     *  Function that takes 2 float as coordinate and
-     *  return the restaurants in the neighbourhood of the coordinate.
-     */
+    *  Function that takes 2 float as coordinate and
+    *  return the restaurants in the neighbourhood of the coordinate.
+    */
   const target = find_my_neighbourhood(x, y);
   return [`${target}CR`, `${target}MR`];
 }
 
 export function mrlocation(x, y) {
   /**
-     * Function that takes 2 float as coordinate and return the array
-     * of the coordinate of middle restaurant in that coordinate neighbourhood
-     */
+    * Function that takes 2 float as coordinate and return the array
+    * of the coordinate of middle restaurant in that coordinate neighbourhood
+    */
   const mrloc = [Math.floor(Number(x)) + 0.5, Math.floor(Number(y)) + 0.5];
   return mrloc;
 }
 
 export function crlocation(x, y) {
   /**
-     * Function that takes 2 float as coordinate and return the array
-     * of the coordinate of corner restaurant in that coordinate neighbourhood
-     */
+    * Function that takes 2 float as coordinate and return the array
+    * of the coordinate of corner restaurant in that coordinate neighbourhood
+    */
   const crloc = [Math.floor(Number(x)), Math.floor(Number(y))];
   return crloc;
 }
 
-export function distance(point1, point2){
-    /**
-     * Function that takes 2 array coordinate and return the Euclidian distance
-     * between them
-     */
-    return Math.sqrt((point1[0]-point2[0])**2+(point1[1]-point2[1])**2);
+export function distance(point1, point2) {
+  /**
+    * Function that takes 2 array coordinate and return the Euclidian distance
+    * between them
+    */
+  return Math.sqrt((point1[0] - point2[0]) ** 2 + (point1[1] - point2[1]) ** 2);
 }
 
-// def find_closest_restaurant_in_neighbourhood(x, y):
-//     """
-//     Function that takes 2 float as coordinate and return the closest
-//     restaurant to the coordinate in the coordinate neighbourhood
-//     """
-//     restaurant = find_all_restaurants_in_neighbourhood(x, y)
+export function find_closest_restaurant_in_neighbourhood(x, y) {
+  /**
+    * Function that takes 2 float as coordinate and return the closest
+    * restaurant to the coordinate in the coordinate neighbourhood
+    */
+  const restaurant = find_all_restaurants_in_neighbourhood(x, y);
 
-//     # Calculating the distance between MR and CR restaurant to the coordinate
-//     mrdist = distance(mrlocation(x, y), (x, y))
-//     crdist = distance(crlocation(x, y), (x, y))
-//     closest = []
+  // Calculating the distance between MR and CR restaurant to the coordinate
+  const mrdist = distance(mrlocation(x, y), [x, y]);
+  const crdist = distance(crlocation(x, y), [x, y]);
+  let closest = [];
 
-//     # Append the closest restaurant and return it
-//     if crdist <= mrdist:
-//         closest.append(restaurant[0])
-//     if mrdist <= crdist:
-//         closest.append(restaurant[1])
-//     return sorted(closest)
+  // Append the closest restaurant and return it
+  if (crdist <= mrdist) {
+    closest.push(restaurant[0]);
+  }
+  if (mrdist <= crdist) {
+    closest.push(restaurant[1]);
+  }
+  return closest.sort();
+}
 
 // def find_farthest_restaurant_in_neighbourhood(x, y):
 //     """
