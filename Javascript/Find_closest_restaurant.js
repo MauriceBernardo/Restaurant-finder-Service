@@ -66,7 +66,7 @@ export function find_closest_restaurant_in_neighbourhood(x, y) {
   // Calculating the distance between MR and CR restaurant to the coordinate
   const mrdist = distance(mrlocation(x, y), [x, y]);
   const crdist = distance(crlocation(x, y), [x, y]);
-  let closest = [];
+  const closest = [];
 
   // Append the closest restaurant and return it
   if (crdist <= mrdist) {
@@ -78,24 +78,29 @@ export function find_closest_restaurant_in_neighbourhood(x, y) {
   return closest.sort();
 }
 
-// def find_farthest_restaurant_in_neighbourhood(x, y):
-//     """
-//     Function that takes 2 float as coordinate and return the farthest
-//     restaurant to the coordinate in the coordinate neighbourhood
-//     """
-//     restaurant = find_all_restaurants_in_neighbourhood(x, y)
+export function find_farthest_restaurant_in_neighbourhood(x, y) {
+  /**
+    * Function that takes 2 float as coordinate and return the farthest
+    * restaurant to the coordinate in the coordinate neighbourhood
+    *
+    */
 
-//     # Calculating the distance between MR and CR restaurant to the coordinate
-//     mrdist = distance(mrlocation(x, y), (x, y))
-//     crdist = distance(crlocation(x, y), (x, y))
-//     farthest = []
+  const restaurant = find_all_restaurants_in_neighbourhood(x, y);
 
-//     # Append the farthest restaurant and return it
-//     if crdist >= mrdist:
-//         farthest.append(restaurant[0])
-//     if mrdist >= crdist:
-//         farthest.append(restaurant[1])
-//     return sorted(farthest)
+  //  Calculating the distance between MR and CR restaurant to the coordinate
+  const mrdist = distance(mrlocation(x, y), [x, y]);
+  const crdist = distance(crlocation(x, y), [x, y]);
+  const farthest = [];
+
+  //  Append the farthest restaurant and return it
+  if (crdist >= mrdist) {
+    farthest.push(restaurant[0]);
+  }
+  if (mrdist >= crdist) {
+    farthest.push(restaurant[1]);
+  }
+  return farthest.sort();
+}
 
 
 // def all_neighbourhood_coordinate():

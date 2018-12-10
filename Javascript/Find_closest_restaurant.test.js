@@ -43,11 +43,20 @@ describe('Euclidian distance function', () => {
   });
 });
 
-describe('Find closest restaurant in neighbourhood method', () => {
-  it ('should return the right restaurant', () => {
-    expect(closestRestaurant.find_closest_restaurant_in_neighbourhood(0,0)).toEqual(["A0CR"]);
-    expect(closestRestaurant.find_closest_restaurant_in_neighbourhood(0.25,0.25)).toEqual(["A0CR","A0MR"]);
-    expect(closestRestaurant.find_closest_restaurant_in_neighbourhood(5.75,5.75)).toEqual(["F5MR"]);
+describe('Find restaurant in neighbourhood function', () => {
+  it('should return the right closest restaurants', () => {
+    expect(closestRestaurant.find_closest_restaurant_in_neighbourhood(0, 0)).toEqual(['A0CR']);
+    expect(closestRestaurant.find_closest_restaurant_in_neighbourhood(0.25, 0.25)).toEqual(['A0CR', 'A0MR']);
+    expect(closestRestaurant.find_closest_restaurant_in_neighbourhood(5.75, 5.75)).toEqual(['F5MR']);
+  });
+
+  it('should return the right farthest restaurants', () => {
+    expect(closestRestaurant.find_farthest_restaurant_in_neighbourhood(0,0)).toEqual(["A0MR"]);
+    expect(closestRestaurant.find_farthest_restaurant_in_neighbourhood(0.25,0.25)).toEqual(["A0CR", "A0MR"]);
+    expect(closestRestaurant.find_farthest_restaurant_in_neighbourhood(5.75,5.75)).toEqual(["F5CR"]);
   })
-})
+});
+
+
+
 
