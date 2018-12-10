@@ -157,15 +157,17 @@ export function find_closest_restaurant(x, y) {
   return closestresto.sort();
 }
 
-// def find_closest_restaurant_on_path(list_of_stops):
-//     """
-//     Function that takes lists of coordinates and return the closest restaurant
-//     to each coordinates in the list in form of list of list
-//     """
-//     pathlist = []
+export function find_closest_restaurant_on_path(list_of_stops) {
+  /**
+    * Function that takes lists of coordinates and return the closest restaurant
+    * to each coordinates in the list in form of list of list
+    */
+  const pathlist = [];
 
-//     # Append the closest restaurants of each coordinates
-//     for lis in list_of_stops:
-//         closest = find_closest_restaurant(lis[0], lis[1])
-//         pathlist.append(closest)
-//     return pathlist
+  //  Append the closest restaurants of each coordinates
+  for (let arr of list_of_stops) {
+    const closest = find_closest_restaurant(arr[0], arr[1]);
+    pathlist.push(closest);
+  }
+  return pathlist;
+}

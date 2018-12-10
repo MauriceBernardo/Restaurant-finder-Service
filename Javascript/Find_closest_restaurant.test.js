@@ -80,6 +80,12 @@ describe("find closest restaurant function", () => {
     expect(closestRestaurant.find_closest_restaurant(0.75,0.75)).toEqual(["A0MR","B1CR"]);
     expect(closestRestaurant.find_closest_restaurant(0.8,0.75)).toEqual(["B1CR"]);
     expect(closestRestaurant.find_closest_restaurant(9,9.5)).toEqual(["J8MR", "J9CR", "J9MR"]);
+  });
+
+  it("should return the closest restaurant on each path", () => {
+    expect(closestRestaurant.find_closest_restaurant_on_path([[0,0],[1,1]])).toEqual([["A0CR"],["B1CR"]])
   })
 })
+
+
 
